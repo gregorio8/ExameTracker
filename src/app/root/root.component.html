@@ -3,7 +3,7 @@
     <h1>Exame Tracker</h1>
   </header>
 
-  <div *ngIf="!auth.user">
+  <!-- <div *ngIf="!auth.user">
     <form>
       <fieldset>
         <legend>Login</legend>
@@ -24,17 +24,18 @@
         </button>
       </fieldset>
     </form>
-  </div>
+  </div> -->
 
   <div *ngIf="auth.error" style="color: red">
     {{ auth.error }}
   </div>
-  <div *ngIf="auth.user">
-    Logged as <b>{{ auth.user.email }}</b> |
-    <button (click)="auth.signOut()">Exit</button>
+
+  <div *ngIf="!auth.user">
+    Bem vindo, logado como: <b>{{ auth.user.email }}</b> |
+    <button class="logout-button buttons" (click)="auth.signOut()">Sair</button>
     <hr />
 
-    <h2>Firebase list</h2>
+    <h2>Agendar Exames</h2>
     <hr />
     <div>Name:</div>
     <div><input [(ngModel)]="formNewName" /></div>

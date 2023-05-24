@@ -14,6 +14,13 @@ export interface Item {
   age: number;
 }
 
+export interface Exames {
+  exame: string;
+  medico: string;
+  data: number;
+  horario: number;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './root.component.html',
