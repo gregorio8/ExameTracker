@@ -1,6 +1,6 @@
 <div class="home-container">
   <header class="home-header">
-    <h1>Exame Tracker</h1>
+    <h1>Consulta Tracker</h1>
   </header>
 
   <!-- <div *ngIf="!auth.user">
@@ -35,7 +35,11 @@
     <button class="logout-button buttons" (click)="auth.signOut()">Sair</button>
     <hr />
 
-    <h2>Agendar Exames</h2>
+    <h2>Agendar Consulta</h2>
+
+    <button class="buttons add-button">Adicionar Consulta</button>
+    <button class="buttons">Listar Consultas</button>
+
     <hr />
     <div>Name:</div>
     <div><input [(ngModel)]="formNewName" /></div>

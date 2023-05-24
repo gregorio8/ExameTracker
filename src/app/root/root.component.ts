@@ -15,6 +15,7 @@ export interface Item {
 }
 
 export interface Exames {
+  especialidade?: string;
   exame: string;
   medico: string;
   data: number;

@@ -16,6 +16,10 @@
   background: linear-gradient(360deg, #add8e6, #6896a6);
 }
 
+.add-button {
+  margin-right: 8px;
+}
+
 .buttons {
   height: 32px;
   width: 150px;
