@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import {
+  AngularFireDatabase,
+  SnapshotAction,
+} from '@angular/fire/compat/database';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-exames',
@@ -10,6 +15,9 @@ export class ExamesComponent {
   medicos: string[] = [];
   selectedMedico: any;
   selectedHorario: any;
+
+  listRef: any;
+  list: Observable<any>;
 
   especialidades = [
     {
@@ -67,6 +75,25 @@ export class ExamesComponent {
     '19:00',
     '20:00',
   ];
+
+  constructor(private database: AngularFireDatabase) {
+    this.listRef = database.list('agenda');
+    this.list = this.listRef
+      .snapshotChanges()
+      .pipe(
+        map((changes: SnapshotAction<any>[]) =>
+          changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
+        )
+      );
+  }
+
+  agendar() {
+    this.listRef.push({
+      especialidade: this.especialidade,
+      medico: this.selectedMedico,
+      horario: this.selectedHorario,
+    });
+  }
 
   onChangeEspecialidade(event: Event) {
     const target = event.target as HTMLSelectElement;
