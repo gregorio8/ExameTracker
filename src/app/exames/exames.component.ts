@@ -63,7 +63,7 @@ export class ExamesComponent {
     // Adicione mais especialidades e médicos conforme necessário
   ];
 
-  horarios = [
+  horarios: string[] = [
     '09:00',
     '10:00',
     '11:00',
@@ -87,12 +87,27 @@ export class ExamesComponent {
       );
   }
 
+  removerHorarioSelecionado() {
+    this.horarios = this.horarios.filter(
+      (horario) => horario !== this.selectedHorario
+    );
+    this.selectedHorario = '';
+  } //arrumar esse mano aqui
+
   agendar() {
-    this.listRef.push({
-      especialidade: this.especialidade,
-      medico: this.selectedMedico,
-      horario: this.selectedHorario,
-    });
+    this.listRef
+      .push({
+        especialidade: this.especialidade,
+        medico: this.selectedMedico,
+        horario: this.selectedHorario,
+      })
+      .then(() => {
+        console.log('Consulta agendada com sucesso!');
+        this.removerHorarioSelecionado();
+      })
+      .catch((error: string) => {
+        console.error('Erro ao agendar consulta:', error);
+      });
   }
 
   onChangeEspecialidade(event: Event) {
