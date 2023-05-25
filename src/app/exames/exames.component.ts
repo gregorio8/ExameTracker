@@ -9,17 +9,63 @@ export class ExamesComponent {
   especialidade: string | undefined;
   medicos: string[] = [];
   selectedMedico: any;
+  selectedHorario: any;
 
   especialidades = [
     {
       nome: 'Cardiologia',
-      medicos: ['Dr. João', 'Dra. Maria'],
+      medicos: ['Dr. João', 'Dra. Maria', 'Dr. Carlos', 'Dra. Ana'],
     },
     {
       nome: 'Dermatologia',
-      medicos: ['Dr. Pedro', 'Dra. Ana'],
+      medicos: ['Dr. Pedro', 'Dra. Sofia'],
+    },
+    {
+      nome: 'Ginecologia',
+      medicos: ['Dr. Roberto', 'Dra. Carolina', 'Dr. Lucas', 'Dra. Gabriela'],
+    },
+    {
+      nome: 'Pediatria',
+      medicos: ['Dr. Rafaela', 'Dra. Luiza', 'Dr. Tiago', 'Dra. Julia'],
+    },
+    {
+      nome: 'Oftalmologia',
+      medicos: ['Dr. Marcelo', 'Dra. Paula', 'Dr. André', 'Dra. Renata'],
+    },
+    {
+      nome: 'Ortopedia',
+      medicos: ['Dr. Ricardo', 'Dra. Fernanda', 'Dr. Eduardo', 'Dra. Beatriz'],
+    },
+    {
+      nome: 'Psiquiatria',
+      medicos: ['Dr. Antônio', 'Dra. Juliana', 'Dr. Carlos'],
+    },
+    {
+      nome: 'Neurologia',
+      medicos: ['Dr. Gustavo'],
+    },
+    {
+      nome: 'Otorrinolaringologia',
+      medicos: ['Dr. Felipe', 'Dra. Valentina', 'Dr. Gabriel', 'Dra. Larissa'],
+    },
+    {
+      nome: 'Urologia',
+      medicos: ['Dr. Marcos', 'Dra. Claudio', 'Dr. Ricardo', 'Dra. Patrick'],
     },
     // Adicione mais especialidades e médicos conforme necessário
+  ];
+
+  horarios = [
+    '09:00',
+    '10:00',
+    '11:00',
+    '14:00',
+    '15:00',
+    '16:00',
+    '17:00',
+    '18:00',
+    '19:00',
+    '20:00',
   ];
 
   onChangeEspecialidade(event: Event) {

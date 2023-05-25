@@ -15,3 +15,12 @@
 </select>
 
 <h3 *ngIf="selectedMedico">Médico selecionado: {{ selectedMedico }}</h3>
+
+<select *ngIf="selectedMedico" [(ngModel)]="selectedHorario">
+<option value="">Selecione um horário</option>
+<option *ngFor="let horario of horarios" [value]="horario">
+  {{ horario }}
+</option>
+</select>
+
+<h3 *ngIf="selectedHorario">Horário selecionado: {{ selectedHorario }}</h3>
