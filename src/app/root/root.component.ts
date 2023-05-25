@@ -30,6 +30,7 @@ export interface Exames {
   styleUrls: ['./root.component.css'],
 })
 export class RootComponent implements OnInit {
+  hide: boolean = false;
   email = '' as string;
   password = '' as string;
 
@@ -71,12 +72,12 @@ export class RootComponent implements OnInit {
   }
 
   goToConsult() {
-    console.log('ta clicando');
+    this.hide = true;
     this.router.navigate(['/exames']);
   }
 
   backHome() {
-    console.log('click');
+    this.hide = false;
     this.router.navigate(['/']);
   }
 }

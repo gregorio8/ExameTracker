@@ -1,3 +1,17 @@
-<p>
-exames works!
-</p>
+<h2>Exames</h2>
+
+<select (change)="onChangeEspecialidade($event)" [(ngModel)]="especialidade">
+  <option value="">Selecione uma especialidade</option>
+  <option *ngFor="let esp of especialidades" [value]="esp.nome">
+    {{ esp.nome }}
+  </option>
+</select>
+
+<select *ngIf="especialidade" [(ngModel)]="selectedMedico">
+  <option value="">Selecione um médico</option>
+  <option *ngFor="let medico of getMedicosEspecialidade()" [value]="medico">
+    {{ medico }}
+  </option>
+</select>
+
+<h3 *ngIf="selectedMedico">Médico selecionado: {{ selectedMedico }}</h3>

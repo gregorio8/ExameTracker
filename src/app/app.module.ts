@@ -9,6 +9,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AuthService } from './auth.service';
 import { RouterModule, Routes } from '@angular/router';
 import { ExamesComponent } from './exames/exames.component';
+import { ExamesModule } from './exames/exames.module';
 
 const routes: Routes = [{ path: 'exames', component: ExamesComponent }];
 
@@ -18,6 +19,7 @@ const routes: Routes = [{ path: 'exames', component: ExamesComponent }];
     CommonModule,
     BrowserModule,
     FormsModule,
+    ExamesModule,
     AngularFireModule.initializeApp({
       apiKey: 'AIzaSyA_uQmCv0mt80ia7NAvo_59kaTuGkjtweU',
       authDomain: 'exametracker.firebaseapp.com',
