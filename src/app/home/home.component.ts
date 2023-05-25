@@ -25,11 +25,11 @@ export interface Exames {
 }
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './root.component.html',
-  styleUrls: ['./root.component.css'],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
 })
-export class RootComponent implements OnInit {
+export class HomeComponent implements OnInit {
   email = '' as string;
   password = '' as string;
 

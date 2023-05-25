@@ -7,7 +7,6 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AuthService } from './auth.service';
-
 import { RouterModule, Routes } from '@angular/router';
 import { ExamesComponent } from './exames/exames.component';
 
