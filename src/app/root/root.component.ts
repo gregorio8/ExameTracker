@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { map } from 'rxjs/operators';
 
+import { Router } from '@angular/router';
+
 export interface Item {
   key: string;
   email: string;
@@ -37,7 +39,11 @@ export class RootComponent implements OnInit {
   listRef: any;
   list: Observable<Item[]>;
 
-  constructor(public auth: AuthService, private database: AngularFireDatabase) {
+  constructor(
+    public auth: AuthService,
+    private database: AngularFireDatabase,
+    private router: Router
+  ) {
     this.listRef = database.list('list');
     this.list = this.listRef
       .snapshotChanges()
@@ -62,5 +68,10 @@ export class RootComponent implements OnInit {
 
   deleteItem(key: string) {
     this.listRef.remove(key);
+  }
+
+  goToConsult(): void {
+    console.log('ta clicando');
+    this.router.navigate('/exames');
   }
 }

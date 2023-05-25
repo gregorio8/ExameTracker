@@ -8,8 +8,14 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AuthService } from './auth.service';
 
+import { RouterModule, Routes } from '@angular/router';
+import { ExamesComponent } from './exames/exames.component';
+
+const routes: Routes = [{ path: 'exames', component: ExamesComponent }];
+
 @NgModule({
   imports: [
+    RouterModule.forRoot(routes),
     CommonModule,
     BrowserModule,
     FormsModule,
@@ -26,6 +32,7 @@ import { AuthService } from './auth.service';
     AngularFireDatabaseModule,
   ],
   declarations: [RootComponent],
+  exports: [RouterModule],
   bootstrap: [RootComponent],
   providers: [AuthService],
 })
