@@ -89,13 +89,25 @@ export class ExamesComponent {
   }
 
   removerHorarioSelecionado() {
-    this.horarios = this.horarios.filter(
-      (horario) => horario !== this.selectedHorario
-    );
-    this.selectedHorario = '';
-  } //arrumar esse mano aqui
+    const index = this.horarios.indexOf(this.selectedHorario);
+    if (index !== -1) {
+      this.horarios.splice(index, 1);
+      this.selectedHorario = '';
+    }
+  }
+
+  adicionarHorarioSelecionado() {
+    if (this.selectedHorario && !this.horarios.includes(this.selectedHorario)) {
+      this.horarios.push(this.selectedHorario);
+      this.selectedHorario = '';
+    }
+  }
 
   agendar() {
+    if (this.selectedHorario && !this.horarios.includes(this.selectedHorario)) {
+      this.horarios.push(this.selectedHorario);
+    }
+
     this.listRef
       .push({
         especialidade: this.especialidade,
@@ -104,6 +116,9 @@ export class ExamesComponent {
       })
       .then(() => {
         console.log('Consulta agendada com sucesso!');
+        this.selectedHorario = '';
+        this.selectedMedico = '';
+        this.especialidade = undefined;
         this.removerHorarioSelecionado();
       })
       .catch((error: string) => {
@@ -128,6 +143,7 @@ export class ExamesComponent {
   }
 
   RemoverExame(key: string) {
+    this.adicionarHorarioSelecionado();
     this.listRef.remove(key);
   }
 }
