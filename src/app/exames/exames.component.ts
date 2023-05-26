@@ -11,7 +11,7 @@ import { map, Observable } from 'rxjs';
   styleUrls: ['./exames.component.css'],
 })
 export class ExamesComponent {
-  hide: boolean = false;
+  examTable: boolean = true;
   especialidade: string | undefined;
   medicos: string[] = [];
   selectedMedico: any;

@@ -26,20 +26,20 @@
 <h3 *ngIf="selectedHorario">Horário selecionado: {{ selectedHorario }}</h3>
 
 <button *ngIf="selectedHorario" (click)="agendar()">Agendar</button>
-<div *ngIf="!hide">
+<div *ngIf="examTable">
+  <h2>Minhas Consultas</h2>
   <table border="1">
     <tr>
       <th>Médico</th>
       <th>Horário</th>
       <th>Especialidade</th>
-      <th>Commmand</th>
     </tr>
     <tr *ngFor="let item of list | async">
       <td [title]="['chave: ' + item.key]">{{ item.selectedMedico }}</td>
       <td>{{ item.selectedHorario }}</td>
       <td>{{ item.especialidade }}</td>
       <td>
-        <button (click)="RemoverExame(item.key)">Remove</button>
+        <button (click)="RemoverExame(item.key)">Remover Exame</button>
       </td>
     </tr>
   </table>
