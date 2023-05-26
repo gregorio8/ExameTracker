@@ -3,25 +3,42 @@
     <h1>Consulta Tracker</h1>
   </header>
 
-  <div *ngIf="!auth.user">
+  <div class="container-login" *ngIf="!auth.user">
     <form>
-      <fieldset>
+      <fieldset class="fieldset-box">
         <legend>Login</legend>
-        <div>Email</div>
-        <input type="text" name="email" [(ngModel)]="email" />
-        <div>Senha</div>
-        <input type="password" name="password" [(ngModel)]="password" />
         <hr />
-        <button
-          class="buttons"
-          (click)="auth.emailSignin(this.email, this.password)"
-        >
-          Login with e-mail
-        </button>
-        |
-        <button class="buttons google" (click)="auth.googleSignin()">
-          Login with Google
-        </button>
+        <div class="login-div">
+          <label class="container-margin">Email</label>
+          <input
+            class="login-inputs"
+            type="text"
+            name="email"
+            [(ngModel)]="email"
+          />
+        </div>
+        <div class="login-div">
+          <label class="container-margin">Senha</label>
+          <input
+            class="login-inputs"
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+          />
+        </div>
+        <hr class="hr-bar" />
+        <div class="sign-in-buttons container-margin">
+          <button
+            class="buttons"
+            (click)="auth.emailSignin(this.email, this.password)"
+          >
+            Login with e-mail
+          </button>
+          <span style="font-size: x-large;">|</span>
+          <button class="buttons google" (click)="auth.googleSignin()">
+            Login with Google
+          </button>
+        </div>
       </fieldset>
     </form>
   </div>
