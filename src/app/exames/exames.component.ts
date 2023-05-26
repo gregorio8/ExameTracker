@@ -11,6 +11,7 @@ import { map, Observable } from 'rxjs';
   styleUrls: ['./exames.component.css'],
 })
 export class ExamesComponent {
+  hide: boolean = false;
   especialidade: string | undefined;
   medicos: string[] = [];
   selectedMedico: any;
@@ -98,8 +99,8 @@ export class ExamesComponent {
     this.listRef
       .push({
         especialidade: this.especialidade,
-        medico: this.selectedMedico,
-        horario: this.selectedHorario,
+        selectedHorario: this.selectedHorario,
+        selectedMedico: this.selectedMedico,
       })
       .then(() => {
         console.log('Consulta agendada com sucesso!');
@@ -124,5 +125,9 @@ export class ExamesComponent {
       (esp) => esp.nome === this.especialidade
     );
     return especialidadeSelecionada?.medicos || [];
+  }
+
+  RemoverExame(key: string) {
+    this.listRef.remove(key);
   }
 }
