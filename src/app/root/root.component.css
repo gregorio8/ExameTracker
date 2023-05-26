@@ -94,3 +94,11 @@ hr {
   border-top-left-radius: 16px;
   border: 2px solid #93929291;
 }
+
+.container-exams {
+  padding: 24px;
+  width: 580px;
+  border: 2px solid black;
+  margin: auto;
+  border-radius: 8px;
+}

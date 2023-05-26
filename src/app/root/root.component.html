@@ -47,7 +47,7 @@
     {{ auth.error }}
   </div>
 
-  <div style="padding: 24px;" *ngIf="auth.user">
+  <div class="container-exams" *ngIf="auth.user">
     Bem vindo, logado como: <b>{{ auth.user.email }}</b> |
     <button class="logout-button buttons" (click)="auth.signOut()">Sair</button>
     <hr />
