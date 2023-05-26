@@ -1,34 +1,63 @@
-<h2>Exames</h2>
+<div>
+  <h3 style="font-weight: 400;">Selecione a especialidade</h3>
 
-<select (change)="onChangeEspecialidade($event)" [(ngModel)]="especialidade">
-  <option value="">Selecione uma especialidade</option>
-  <option *ngFor="let esp of especialidades" [value]="esp.nome">
-    {{ esp.nome }}
-  </option>
-</select>
+  <select
+    class="exames-select"
+    (change)="onChangeEspecialidade($event)"
+    [(ngModel)]="especialidade"
+  >
+    <option value="">Especialidades</option>
+    <option *ngFor="let esp of especialidades" [value]="esp.nome">
+      {{ esp.nome }}
+    </option>
+  </select>
 
-<select *ngIf="especialidade" [(ngModel)]="selectedMedico">
-  <option value="">Selecione um médico</option>
-  <option *ngFor="let medico of getMedicosEspecialidade()" [value]="medico">
-    {{ medico }}
-  </option>
-</select>
+  <h3 style="font-weight: 400;" *ngIf="especialidade">
+    Selecione o profissional
+  </h3>
+</div>
 
-<h3 *ngIf="selectedMedico">Médico selecionado: {{ selectedMedico }}</h3>
+<div>
+  <select
+    class="exames-select"
+    *ngIf="especialidade"
+    [(ngModel)]="selectedMedico"
+  >
+    <option value="">Médicos</option>
+    <option *ngFor="let medico of getMedicosEspecialidade()" [value]="medico">
+      {{ medico }}
+    </option>
+  </select>
 
-<select *ngIf="selectedMedico" [(ngModel)]="selectedHorario">
-  <option value="">Selecione um horário</option>
-  <option *ngFor="let horario of horarios" [value]="horario">
-    {{ horario }}
-  </option>
-</select>
+  <h3 style="font-weight: 400;" *ngIf="selectedMedico">
+    Médico selecionado: {{ selectedMedico }}
+  </h3>
+</div>
 
-<h3 *ngIf="selectedHorario">Horário selecionado: {{ selectedHorario }}</h3>
+<div>
+  <select
+    class="exames-select"
+    *ngIf="selectedMedico"
+    [(ngModel)]="selectedHorario"
+  >
+    <option value="">Selecione um horário</option>
+    <option *ngFor="let horario of horarios" [value]="horario">
+      {{ horario }}
+    </option>
+  </select>
 
-<button *ngIf="selectedHorario" (click)="agendar()">Agendar</button>
+  <h3 style="font-weight: 400;" *ngIf="selectedHorario">
+    Horário selecionado: {{ selectedHorario }}
+  </h3>
+</div>
+
+<button class="agendar-btn" *ngIf="selectedHorario" (click)="agendar()">
+  Agendar
+</button>
+
 <div *ngIf="examTable">
   <h2>Minhas Consultas</h2>
-  <table border="1">
+  <table style="margin: 0" border="1">
     <tr>
       <th>Médico</th>
       <th>Horário</th>
