@@ -24,8 +24,11 @@
     [(ngModel)]="selectedMedico"
   >
     <option value="">Médicos</option>
-    <option *ngFor="let medico of getMedicosEspecialidade()" [value]="medico">
-      {{ medico }}
+    <option
+      *ngFor="let medico of getMedicosEspecialidade()"
+      [value]="medico.nome"
+    >
+      {{ medico.nome }}
     </option>
   </select>
 
@@ -41,7 +44,10 @@
     [(ngModel)]="selectedHorario"
   >
     <option value="">Selecione um horário</option>
-    <option *ngFor="let horario of horarios" [value]="horario">
+    <option
+      *ngFor="let horario of getHorariosMedico(selectedMedico)"
+      [value]="horario"
+    >
       {{ horario }}
     </option>
   </select>

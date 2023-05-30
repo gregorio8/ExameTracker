@@ -85,7 +85,7 @@ export class RootComponent implements OnInit {
 
   showTable() {
     this.hide = true;
-    this.examTable = false;
+    this.examTable = true; // Set examTable to true
     this.router.navigate(['/exames']);
   }
 }
