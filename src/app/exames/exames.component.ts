@@ -3,6 +3,7 @@ import {
   AngularFireDatabase,
   SnapshotAction,
 } from '@angular/fire/compat/database';
+import { ActivatedRoute } from '@angular/router';
 import { map, Observable } from 'rxjs';
 
 @Component({
@@ -17,6 +18,9 @@ export class ExamesComponent {
   horarios: string[] = [];
   selectedMedico: any;
   selectedHorario: any;
+  calendar: any;
+
+  mostrarFormulario = false;
 
   listRef: any;
   list: Observable<any>;
@@ -128,7 +132,10 @@ export class ExamesComponent {
     },
   ];
 
-  constructor(private database: AngularFireDatabase) {
+  constructor(
+    private database: AngularFireDatabase,
+    private route: ActivatedRoute
+  ) {
     this.listRef = database.list('agenda');
     this.list = this.listRef
       .snapshotChanges()
@@ -137,6 +144,12 @@ export class ExamesComponent {
           changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
         )
       );
+  }
+
+  ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      this.mostrarFormulario = params['mostrarFormulario'] === 'true';
+    });
   }
 
   removerHorarioSelecionado() {
@@ -185,7 +198,7 @@ export class ExamesComponent {
     }
   }
 
-  agendar() {
+  agendar(dataSelecionada: string) {
     if (this.selectedHorario) {
       const especialidadeSelecionada = this.especialidades.find(
         (esp) => esp.nome === this.especialidade
@@ -209,6 +222,7 @@ export class ExamesComponent {
                 especialidade: this.especialidade,
                 selectedHorario: this.selectedHorario,
                 selectedMedico: this.selectedMedico,
+                calendar: dataSelecionada,
               })
               .then(() => {
                 console.log('Consulta agendada com sucesso!');
@@ -216,6 +230,7 @@ export class ExamesComponent {
                 this.selectedMedico = '';
                 this.especialidade = undefined;
                 this.removerHorarioSelecionado();
+                this.calendar = '';
               })
               .catch((error: any) => {
                 console.error('Erro ao agendar consulta:', error);

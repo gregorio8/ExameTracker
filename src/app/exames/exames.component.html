@@ -1,81 +1,98 @@
-<div>
-  <h3 style="font-weight: 400;">Selecione a especialidade</h3>
+<div *ngIf="mostrarFormulario">
+  <div>
+    <h3 style="font-weight: 400;">Selecione a especialidade</h3>
 
-  <select
-    class="exames-select"
-    (change)="onChangeEspecialidade($event)"
-    [(ngModel)]="especialidade"
-  >
-    <option value="">Especialidades</option>
-    <option *ngFor="let esp of especialidades" [value]="esp.nome">
-      {{ esp.nome }}
-    </option>
-  </select>
-
-  <h3 style="font-weight: 400;" *ngIf="especialidade">
-    Selecione o profissional
-  </h3>
-</div>
-
-<div>
-  <select
-    class="exames-select"
-    *ngIf="especialidade"
-    [(ngModel)]="selectedMedico"
-  >
-    <option value="">Médicos</option>
-    <option
-      *ngFor="let medico of getMedicosEspecialidade()"
-      [value]="medico.nome"
+    <select
+      class="exames-select"
+      (change)="onChangeEspecialidade($event)"
+      [(ngModel)]="especialidade"
     >
-      {{ medico.nome }}
-    </option>
-  </select>
+      <option value="">Especialidades</option>
+      <option *ngFor="let esp of especialidades" [value]="esp.nome">
+        {{ esp.nome }}
+      </option>
+    </select>
+  </div>
 
-  <h3 style="font-weight: 400;" *ngIf="selectedMedico">
-    Médico selecionado: {{ selectedMedico }}
-  </h3>
-</div>
+  <div *ngIf="especialidade">
+    <h3 style="font-weight: 400;">Selecione o profissional</h3>
 
-<div>
-  <select
-    class="exames-select"
-    *ngIf="selectedMedico"
-    [(ngModel)]="selectedHorario"
+    <select class="exames-select" [(ngModel)]="selectedMedico">
+      <option value="">Médicos</option>
+      <option
+        *ngFor="let medico of getMedicosEspecialidade()"
+        [value]="medico.nome"
+      >
+        {{ medico.nome }}
+      </option>
+    </select>
+
+    <h3 style="font-weight: 400;" *ngIf="selectedMedico">
+      Médico selecionado: {{ selectedMedico }} | Escolha a data:
+    </h3>
+  </div>
+
+  <div *ngIf="selectedMedico">
+    <div>
+      <input
+        type="date"
+        id="calendar"
+        name="date"
+        required
+        class="date-picker"
+        pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+        [(ngModel)]="calendar"
+      />
+    </div>
+    <h3 style="font-weight: 400;" *ngIf="selectedMedico">
+      Data da consulta: {{ calendar }} | Agora o horário:
+    </h3>
+  </div>
+
+  <div *ngIf="calendar">
+    <select class="exames-select" [(ngModel)]="selectedHorario">
+      <option value="">Selecione um horário</option>
+      <option
+        *ngFor="let horario of getHorariosMedico(selectedMedico)"
+        [value]="horario"
+      >
+        {{ horario }}
+      </option>
+    </select>
+
+    <h3 style="font-weight: 400;" *ngIf="selectedHorario">
+      Horário selecionado: {{ selectedHorario }}
+    </h3>
+  </div>
+
+  <button
+    class="agendar-btn"
+    *ngIf="selectedHorario"
+    (click)="agendar(calendar)"
   >
-    <option value="">Selecione um horário</option>
-    <option
-      *ngFor="let horario of getHorariosMedico(selectedMedico)"
-      [value]="horario"
-    >
-      {{ horario }}
-    </option>
-  </select>
-
-  <h3 style="font-weight: 400;" *ngIf="selectedHorario">
-    Horário selecionado: {{ selectedHorario }}
-  </h3>
+    Agendar
+  </button>
 </div>
 
-<button class="agendar-btn" *ngIf="selectedHorario" (click)="agendar()">
-  Agendar
-</button>
-
-<div *ngIf="examTable">
+<div *ngIf="!mostrarFormulario">
   <h2>Minhas Consultas</h2>
-  <table style="margin: 0" border="1">
-    <tr>
-      <th>Médico</th>
-      <th>Horário</th>
-      <th>Especialidade</th>
-    </tr>
-    <tr *ngFor="let item of list | async">
-      <td [title]="['chave: ' + item.key]">{{ item.selectedMedico }}</td>
-      <td>{{ item.selectedHorario }}</td>
-      <td>{{ item.especialidade }}</td>
-      <td>
-        <button (click)="RemoverExame(item.key)">Remover Exame</button>
-      </td>
-    </tr>
-  </table>
+  <div *ngIf="examTable">
+    <table style="margin: 0" border="1">
+      <tr>
+        <th>Médico</th>
+        <th>Horário</th>
+        <th>Especialidade</th>
+        <th>Data</th>
+      </tr>
+      <tr *ngFor="let item of list | async">
+        <td [title]="['chave: ' + item.key]">{{ item.selectedMedico }}</td>
+        <td>{{ item.selectedHorario }}</td>
+        <td>{{ item.especialidade }}</td>
+        <td>{{ item.calendar }}</td>
+        <td>
+          <button (click)="RemoverExame(item.key)">Remover Exame</button>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>

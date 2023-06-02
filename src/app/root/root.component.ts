@@ -74,7 +74,7 @@ export class RootComponent implements OnInit {
 
   goToConsult() {
     this.hide = true;
-    this.router.navigate(['/exames']);
+    this.router.navigate(['/exames'], { queryParams: { mostrarFormulario: 'true' } });
   }
 
   backHome() {
@@ -85,7 +85,7 @@ export class RootComponent implements OnInit {
 
   showTable() {
     this.hide = true;
-    this.examTable = true; // Set examTable to true
+    this.examTable = true;
     this.router.navigate(['/exames']);
   }
 }
