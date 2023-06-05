@@ -8,6 +8,7 @@ import { AuthService } from '../auth.service';
 import { map } from 'rxjs/operators';
 
 import { Router } from '@angular/router';
+import { CadastroService } from '../cadastro/cadastro.service';
 
 export interface Item {
   key: string;
@@ -32,6 +33,7 @@ export interface Exames {
 export class RootComponent implements OnInit {
   hide: boolean = false;
   examTable: boolean = false;
+  showCadastro: boolean = false;
   email = '' as string;
   password = '' as string;
 
@@ -44,7 +46,8 @@ export class RootComponent implements OnInit {
   constructor(
     public auth: AuthService,
     private database: AngularFireDatabase,
-    private router: Router
+    private router: Router,
+    private cadastroService: CadastroService
   ) {
     this.listRef = database.list('list');
     this.list = this.listRef
@@ -54,9 +57,17 @@ export class RootComponent implements OnInit {
           changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
         )
       );
+
+      this.cadastroService.showCadastro$.subscribe((value) => {
+        this.showCadastro = value;
+      });
   }
 
   ngOnInit() {}
+
+  toggleCadastro() {
+    this.cadastroService.setShowCadastro(!this.showCadastro);
+  }
 
   addItem() {
     this.listRef.push({
@@ -74,7 +85,9 @@ export class RootComponent implements OnInit {
 
   goToConsult() {
     this.hide = true;
-    this.router.navigate(['/exames'], { queryParams: { mostrarFormulario: 'true' } });
+    this.router.navigate(['/exames'], {
+      queryParams: { mostrarFormulario: 'true' },
+    });
   }
 
   backHome() {
@@ -87,5 +100,10 @@ export class RootComponent implements OnInit {
     this.hide = true;
     this.examTable = true;
     this.router.navigate(['/exames']);
+  }
+
+  abrirCadastro() {
+    this.showCadastro = true;
+    this.router.navigate(['/cadastro']);
   }
 }

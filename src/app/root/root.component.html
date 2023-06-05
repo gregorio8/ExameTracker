@@ -1,4 +1,4 @@
-<div class="home-container">
+<div *ngIf="!showCadastro" class="home-container">
   <header class="home-header">
     <h1>Consulta Tracker v1</h1>
   </header>
@@ -39,7 +39,7 @@
             Login with Google
           </button>
           <span style="font-size: x-large;">|</span>
-          <button class="buttons">Cadastro</button>
+          <button (click)="abrirCadastro()" class="buttons">Cadastro</button>
         </div>
       </fieldset>
     </form>
@@ -67,3 +67,5 @@
     <router-outlet *ngIf="hide"></router-outlet>
   </div>
 </div>
+
+<router-outlet *ngIf="showCadastro"></router-outlet>

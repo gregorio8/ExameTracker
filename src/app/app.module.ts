@@ -10,8 +10,13 @@ import { AuthService } from './auth.service';
 import { RouterModule, Routes } from '@angular/router';
 import { ExamesComponent } from './exames/exames.component';
 import { ExamesModule } from './exames/exames.module';
+import { CadastroComponent } from './cadastro/cadastro.component';
+import { CadastroModule } from './cadastro/cadastro.module';
 
-const routes: Routes = [{ path: 'exames', component: ExamesComponent }];
+const routes: Routes = [
+  { path: 'exames', component: ExamesComponent },
+  { path: 'cadastro', component: CadastroComponent },
+];
 
 @NgModule({
   imports: [
@@ -20,6 +25,7 @@ const routes: Routes = [{ path: 'exames', component: ExamesComponent }];
     BrowserModule,
     FormsModule,
     ExamesModule,
+    CadastroModule,
     AngularFireModule.initializeApp({
       apiKey: 'AIzaSyA_uQmCv0mt80ia7NAvo_59kaTuGkjtweU',
       authDomain: 'exametracker.firebaseapp.com',
