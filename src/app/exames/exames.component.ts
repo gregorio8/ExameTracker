@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFireDatabase,
   SnapshotAction,
@@ -23,7 +24,7 @@ export class ExamesComponent {
   mostrarFormulario = false;
 
   listRef: any;
-  list: Observable<any>;
+  list: Observable<any[]>;
   especialidades = [
     {
       nome: 'Cardiologia',
@@ -134,16 +135,24 @@ export class ExamesComponent {
 
   constructor(
     private database: AngularFireDatabase,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private auth: AngularFireAuth
   ) {
-    this.listRef = database.list('agenda');
-    this.list = this.listRef
-      .snapshotChanges()
-      .pipe(
-        map((changes: SnapshotAction<any>[]) =>
-          changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
-        )
-      );
+    this.listRef = database.list('consultas');
+    this.list = this.listRef.valueChanges();
+    this.auth.currentUser.then((user) => {
+      if (user) {
+        const uid = user.uid;
+        this.listRef = this.database.list(`users/${uid}/consultas`);
+        this.list = this.listRef
+          .snapshotChanges()
+          .pipe(
+            map((changes: SnapshotAction<any>[]) =>
+              changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
+            )
+          );
+      }
+    });
   }
 
   ngOnInit() {
