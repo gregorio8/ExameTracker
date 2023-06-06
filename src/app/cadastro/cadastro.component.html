@@ -1,19 +1,37 @@
-<h2>Cadastro</h2>
-<button (click)="backToHome()">Voltar</button>
-<form (ngSubmit)="register()">
-  <div>
-    <label for="email">Email:</label>
-    <input type="email" id="email" [(ngModel)]="email" name="email" required />
-  </div>
-  <div>
-    <label for="senha">Senha:</label>
-    <input
-      type="password"
-      id="senha"
-      [(ngModel)]="senha"
-      name="senha"
-      required
-    />
-  </div>
-  <button type="submit">Cadastrar</button>
-</form>
+<div class="container">
+  <h1>Faça seu cadastro</h1>
+  <form class="form" (ngSubmit)="register()">
+    <fieldset>
+      <legend>Registro para consultas</legend>
+      <hr />
+      <div class="inputs">
+        <label for="email">Email:</label>
+        <input
+          class="input-box"
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
+      </div>
+      <div class="inputs">
+        <label for="senha">Senha:</label>
+        <input
+          class="input-box"
+          type="password"
+          id="senha"
+          [(ngModel)]="senha"
+          name="senha"
+          required
+        />
+      </div>
+      <hr />
+      <div class="buttons-box">
+        <button class="buttons" type="submit">Cadastrar</button>
+        <span style="font-size: x-large;">|</span>
+        <button class="buttons" (click)="backToHome()">Retornar</button>
+      </div>
+    </fieldset>
+  </form>
+</div>

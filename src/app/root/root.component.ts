@@ -58,9 +58,9 @@ export class RootComponent implements OnInit {
         )
       );
 
-      this.cadastroService.showCadastro$.subscribe((value) => {
-        this.showCadastro = value;
-      });
+    this.cadastroService.showCadastro$.subscribe((value) => {
+      this.showCadastro = value;
+    });
   }
 
   ngOnInit() {}
